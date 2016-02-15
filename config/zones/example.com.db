@@ -1,0 +1,12 @@
+example.com. 1800  IN  SOA  ns1.example.com. mailbox.example.com. (
+                              2016021501   ; Seriennummer
+                              86400   ; Refresh Time
+                              7200   ; Retry Time
+                              3600000  ; Expire Time
+                              86400   ; negative Caching Zeit
+                              )
+
+example.com. 1800  IN  NS ns1.example.com.
+ns1.example.com. 1800  IN  A    172.27.182.17
+www.example.com. 1800  IN  A    192.168.1.2
+webmail    3600   IN      CNAME   www.example.com.
