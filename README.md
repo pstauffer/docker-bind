@@ -15,7 +15,8 @@ To run the named service with an unprivileged user, it's needed to configure bin
 Edit your `named.conf` and add the following line in the `options` block:
 ```
 listen-on port 10053 { any; };
-``` 
+```
+And don't forget to bind the port like `--publish 53:10053/udp`
 
 ### Run
 Use this docker command to run the bind container.
