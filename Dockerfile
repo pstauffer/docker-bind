@@ -15,4 +15,3 @@ USER ${USER}
 VOLUME /etc/bind
 
 CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-f"]
-
