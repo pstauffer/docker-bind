@@ -37,4 +37,4 @@ echo "[DONE]"
 #
 
 echo "Starting named... "
-/usr/sbin/named -u named -c /etc/bind/named.conf -g
+/usr/sbin/named -u named -c /etc/bind/named.conf -f
