@@ -25,7 +25,7 @@ RUN chmod 750 /named.sh
 
 VOLUME ["/etc/bind", "/var/log/named"]
 
-EXPOSE 53
+EXPOSE 53/udp
 
 WORKDIR /etc/bind
 
