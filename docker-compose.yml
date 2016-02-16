@@ -1,0 +1,11 @@
+bind:
+  image: pstauffer/bind
+
+  restart: always
+
+  ports:
+  - 53:10053/udp
+
+  volumes:
+  - /bindconfig:/etc/bind
+  - /bindlog:/var/log/named

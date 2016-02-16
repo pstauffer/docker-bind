@@ -2,16 +2,36 @@ FROM alpine:3.3
 
 MAINTAINER pstauffer@confirm.ch
 
-ENV USER=named
+#
+# Install all required dependencies.
+#
 
 RUN apk --update upgrade && \
     apk add --update bind && \
     rm -rf /var/cache/apk/*
 
-RUN chown -R ${USER}:${USER} /var/bind /etc/bind /var/run/named /var/log/named
 
-USER ${USER}
+#
+# Add named init script.
+#
 
-VOLUME /etc/bind
+ADD named.sh /named.sh
+RUN chmod 750 /named.sh
 
-CMD ["/usr/sbin/named", "-c", "/etc/bind/named.conf", "-f"]
+
+#
+# Define container settings.
+#
+
+VOLUME ["/etc/bind", "/var/log/named"]
+
+EXPOSE 53
+
+WORKDIR /etc/bind
+
+
+#
+# Start named.
+#
+
+CMD ["/named.sh"]
