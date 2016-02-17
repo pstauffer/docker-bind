@@ -4,8 +4,7 @@ bind:
   restart: always
 
   ports:
-  - 53:10053/udp
+  - 53:53/udp
 
   volumes:
-  - /bindconfig:/etc/bind
-  - /bindlog:/var/log/named
+  - ./config:/etc/bind
