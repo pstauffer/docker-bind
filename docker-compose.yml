@@ -1,10 +1,10 @@
 bind:
   image: pstauffer/bind
 
-  restart: always
-
   ports:
   - 53:53/udp
 
   volumes:
   - ./bindconfig:/etc/bind
+
+  restart: always
