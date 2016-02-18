@@ -15,8 +15,8 @@ RUN apk --update upgrade && \
 # Add named init script.
 #
 
-ADD named.sh /named.sh
-RUN chmod 750 /named.sh
+ADD init.sh /init.sh
+RUN chmod 750 /init.sh
 
 
 #
@@ -34,4 +34,4 @@ WORKDIR /etc/bind
 # Start named.
 #
 
-CMD ["/named.sh"]
+CMD ["/init.sh"]
