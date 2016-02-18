@@ -7,4 +7,4 @@ bind:
   - 53:53/udp
 
   volumes:
-  - ./config:/etc/bind
+  - ./bindconfig:/etc/bind
