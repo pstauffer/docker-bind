@@ -6,5 +6,6 @@ bind:
 
   volumes:
   - ./bindconfig:/etc/bind
+  - /var/log/named:/var/log/named
 
   restart: always
