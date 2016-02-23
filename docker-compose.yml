@@ -1,5 +1,5 @@
 bind:
-  image: pstauffer/bind
+  image: pstauffer/bind:stable
 
   ports:
   - 53:53/udp
