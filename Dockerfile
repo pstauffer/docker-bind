@@ -7,7 +7,7 @@ MAINTAINER pstauffer@confirm.ch
 #
 
 RUN apk --update upgrade && \
-    apk add --update bind && \
+    apk add --update bind inotify-tools && \
     rm -rf /var/cache/apk/*
 
 
