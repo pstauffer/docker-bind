@@ -24,6 +24,16 @@ printf "Updating UID / GID... "
 echo "[DONE]"
 
 #
+# Create rndc key
+#
+
+if [ ! -s /etc/bind/rndc.key ]; then
+    printf "Create rndc key"
+    rndc-confgen -r /dev/urandom -a
+    echo "[DONE]"
+fi
+
+#
 # Set owner and permissions.
 #
 
@@ -33,8 +43,15 @@ chmod -R o-rwx /var/bind /etc/bind /var/run/named /var/log/named
 echo "[DONE]"
 
 #
-# Finally, start named.
+# Start named.
 #
 
 echo "Starting named... "
-/usr/sbin/named -u named -c /etc/bind/named.conf -f
+/usr/sbin/named -u named -c /etc/bind/named.conf -f &
+
+#
+# Start inotifywait
+#
+
+echo "Starting inotifywait... "
+while inotifywait -e create,delete,modify,move -q /etc/bind; do rndc reload; done
