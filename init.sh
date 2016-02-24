@@ -64,5 +64,4 @@ echo "[DONE]"
 # Start named.
 #
 echo "Start named... "
-eval ${COMMAND}
-echo "[DONE]"
+exec ${COMMAND}
