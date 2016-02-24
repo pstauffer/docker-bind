@@ -25,7 +25,11 @@ docker-compse up -d
 ```
 
 ### Docker Environment Variables
-It's possible to change the uid/gid of the technical bind user/group. Just pass the following variables via docker to the container:
+It's possible to change some variables like the uid/gid of the technical bind user/group or the executed named command. Just pass the variables via docker command to the container or define them in the docker-compose file.
+
+
+#### User-ID / GroupID
+Example of overwrite of the uid/gid.
 ```
 NAMED_UID=666
 NAMED_GID=666
@@ -38,10 +42,21 @@ or via docker-compose file:
     - NAMED_GID=666
 ```
 
-The default ids are in the alpine bind package are:
+The default ids in the alpine bind package are:
 ```
 UID=1000
 GID=101
+```
+
+#### Named Command
+It's also possible to add some additional `named` command options. Just overwrite the following variable:
+```
+COMMAND_OPTIONS=<option>
+```
+
+For example if you like to write all logs to the stoud, then change the variable `COMMAND` like this:
+```
+COMMAND_OPTIONS=-g
 ```
 
 
