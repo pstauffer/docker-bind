@@ -1,9 +1,4 @@
-#!/bin/sh
-
-#
-# Script options (exit script on command fail).
-#
-set -e
+#!/bin/sh -e
 
 #
 # Variables.
@@ -39,25 +34,43 @@ then
     addgroup -g ${NAMED_GID} ${GROUP}
     adduser -u ${NAMED_UID} -G ${GROUP} -h /etc/bind -g 'Linux User named' -s /sbin/nologin -D ${USER}
     echo "[DONE]"
-    echo "Set owner and permissions for old uid/gid files"
-    find / -user ${NAMED_UID_ACTUAL} -exec chown ${USER} {} \;
-    find / -group ${NAMED_GID_ACTUAL} -exec chgrp ${GROUP} {} \;
-    echo "[DONE]"
 else
     echo "[NOTHING DONE]"
 fi
 
 #
-# Set owner and permissions.
+# Create rndc key
 #
-echo "Set owner and permissions... "
-chown -R ${USER}:${GROUP} /var/bind /etc/bind /var/run/named /var/log/named
-chmod -R o-rwx /var/bind /etc/bind /var/run/named /var/log/named
+printf "Create rndc key"
+if [ -s /etc/bind/rndc.key ]; then
+    rm /etc/bind/rndc.key
+fi
+rndc-confgen -r /dev/urandom -a
+
+#
+# Set owner and group.
+#
+echo "Set owner and group... "
+if [ ! -d /var/run/named ]; then
+    mkdir -p /var/run/named
+fi
+chown ${USER}:${GROUP} /var/run/named
+if [ ! -d /var/cache/bind ]; then
+    mkdir -p /var/cache/bind
+fi
+chown ${USER}:${GROUP} /var/cache/bind
+chown -R ${USER}:${GROUP} /etc/bind
 echo "[DONE]"
 
 #
 # Start named.
 #
 echo "Start named... "
-/usr/sbin/named -u ${USER} -c /etc/bind/named.conf -f
+/usr/sbin/named -u ${USER} -c /etc/bind/named.conf -g &
 echo "[DONE]"
+
+#
+# Start inotifywait
+#
+echo "Starting inotifywait... "
+while inotifywait -e create,delete,modify,move -q /etc/bind; do rndc reload; done
