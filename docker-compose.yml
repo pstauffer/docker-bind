@@ -1,5 +1,6 @@
 bind:
-  image: pstauffer/bind:stable
+  image: 'pstauffer/bind:stable'
+  container_name: 'bind'
 
   ports:
   - 53:53/udp
