@@ -6,7 +6,7 @@ This docker image provides a [bind service](https://www.isc.org/downloads/bind/)
 
 ## Usage
 
-If you like to use this image, please use a specific version tag like `v1.0.0` or the tag `latest`, `develop` or `stable`. The other branches are only temporary and will be deleted after the merge into the other branches.
+If you like to use this image, please use a specific version tag like `v1.0.0` or the branches `latest`, `stable`. The other branches are only temporary and will be deleted after the merge into the other branches.
 
 There are two options to start your Bind container.
 
@@ -19,7 +19,7 @@ docker run -d --name bind --publish 53:53/udp \
 ```
 
 ### Docker Compose
-Or check out the docker-compose file in the [git repo](https://raw.githubusercontent.com/pstauffer/docker-bind/master/Dockerfile).
+Check out the docker-compose file in the [git repo](https://raw.githubusercontent.com/pstauffer/docker-bind/master/docker-compose.yml).
 ```
 docker-compse up -d
 ```
@@ -95,3 +95,8 @@ dig webmail.example.com @localhost
 
 nslookup webmail.example.com localhost
 ```
+
+
+
+## License
+This project is licensed under `MIT <http://opensource.org/licenses/MIT>`_.
