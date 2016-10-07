@@ -4,6 +4,8 @@
 
 This docker image provides a [bind service](https://www.isc.org/downloads/bind/) based on [Alpine Linux](https://hub.docker.com/_/alpine/).
 
+[![](https://images.microbadger.com/badges/image/pstauffer/bind.svg)](https://microbadger.com/images/pstauffer/bind)
+
 ## Usage
 
 If you like to use this image, please use a specific version tag like `v1.0.0` or the branches `latest`, `stable`. The other branches are only temporary and will be deleted after the merge into the other branches.
