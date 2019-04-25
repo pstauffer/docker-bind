@@ -45,8 +45,8 @@ then
     adduser -u ${NAMED_UID} -G ${GROUP} -h /etc/bind -g 'Linux User named' -s /sbin/nologin -D ${USER}
     echo "[DONE]"
     echo "Set owner and permissions for old uid/gid files"
-    find / -user ${NAMED_UID_ACTUAL} -exec chown ${USER} {} \;
-    find / -group ${NAMED_GID_ACTUAL} -exec chgrp ${GROUP} {} \;
+    find / -not \( -path /proc -prune \) -not \( -path /sys -prune \) -user ${NAMED_UID_ACTUAL} -exec chown ${USER} {} \;
+    find / -not \( -path /proc -prune \) -not \( -path /sys -prune \) -group ${NAMED_GID_ACTUAL} -exec chgrp ${GROUP} {} \;
     echo "[DONE]"
 else
     echo "[NOTHING DONE]"
