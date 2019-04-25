@@ -13,6 +13,7 @@ If you like to use this image, please use a specific version tag like `v1.0.0` o
 There are two options to start your Bind container.
 
 ### Docker Run
+
 Use this docker command to run the bind container.
 ```
 docker run -d --name bind --publish 53:53/udp \
@@ -20,17 +21,21 @@ docker run -d --name bind --publish 53:53/udp \
 --restart=always pstauffer/bind:stable
 ```
 
-### Docker Compose
-Check out the docker-compose file in the [git repo](https://raw.githubusercontent.com/pstauffer/docker-bind/master/docker-compose.yml).
+
+### docker-compose
+
+Check out the `docker-compose.yml` file in the [git repo](https://raw.githubusercontent.com/pstauffer/docker-bind/master/docker-compose.yml).
 ```
-docker-compse up -d
+docker-compose up -d
 ```
 
 ### Docker Environment Variables
+
 It's possible to change some variables like the uid/gid of the technical bind user/group or the executed named command. Just pass the variables via docker command to the container or define them in the docker-compose file.
 
 
 #### User-ID / GroupID
+
 Example of overwrite of the uid/gid.
 ```
 NAMED_UID=666
@@ -51,6 +56,7 @@ GID=101
 ```
 
 #### Named Command
+
 It's also possible to add some additional `named` command options. Just overwrite the following variable:
 ```
 COMMAND_OPTIONS=<option>
@@ -65,6 +71,7 @@ COMMAND_OPTIONS=-g
 ## Bind Stuff
 
 ### Bind Configuration
+
 To pass your configuration directory with all configs and files, you've to mount the volume into the docker container with the docker option:
 ```
 -v <bindconfig>:/etc/bind
@@ -76,6 +83,7 @@ chown 1000:101 <bindconfig>/*
 ```
 
 ## Bind Logfiles
+
 To log the bind logs on your docker host, just mount a directory into the docker container:
 ```
 -v <logdir>:/var/log/named
@@ -87,10 +95,12 @@ chown 1000:101 <bindconfig>/*
 ```
 
 ## Bind Sample Configuration
+
 A working bind configuration is provided in the [git repo](https://github.com/pstauffer/docker-bind/tree/master/bindconfig).
 Just mount this example folder into the docker container and you're bind should work.
 
 ## Bind Test
+
 You can test the dns responses with `dig` or `nslookup` on the docker host.
 ```
 dig webmail.example.com @localhost
@@ -98,7 +108,6 @@ dig webmail.example.com @localhost
 nslookup webmail.example.com localhost
 ```
 
-
-
 ## License
+
 This project is licensed under `MIT <http://opensource.org/licenses/MIT>`_.
